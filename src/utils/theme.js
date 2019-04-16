@@ -72,18 +72,6 @@ theme = {
 				backgroundColor: '#404854',
 			},
 		},
-		MuiTableCell: {
-			root: {
-				padding: 10,
-			},
-			head: {
-				padding: 0,
-				textAlign: 'center',
-				'&:last-child': {
-					padding: 0,
-				},
-			},
-		},
 		MuiAvatar: {
 			root: {
 				width: 32,

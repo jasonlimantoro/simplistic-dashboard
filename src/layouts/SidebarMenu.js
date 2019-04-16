@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
@@ -22,6 +22,9 @@ const styles = theme => ({
 		paddingTop: 15,
 		paddingBottom: 15,
 		color: 'rgba(255, 255, 255, 0.7)',
+		'&.active': {
+			color: '#4fc3f7',
+		},
 	},
 	itemCategory: {
 		backgroundColor: '#232f3e',
@@ -33,9 +36,6 @@ const styles = theme => ({
 		'&:hover': {
 			backgroundColor: 'rgba(255, 255, 255, 0.08)',
 		},
-	},
-	itemActiveItem: {
-		color: '#4fc3f7',
 	},
 	itemPrimary: {
 		color: 'inherit',
@@ -77,7 +77,7 @@ const SidebarMenu = ({ menus, classes }) => {
 								classes.item,
 								classes.itemActionable,
 							)}
-							component={Link}
+							component={NavLink}
 							to={link}
 						>
 							<ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>

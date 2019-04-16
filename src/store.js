@@ -17,19 +17,19 @@ const configureStore = (preloadedState) => {
 export const preloadedState = {
 	confidentialities: {
 		data: [],
-		status: {},
+		status: '',
 		response: {},
 		error: '',
 	},
 	doctypes: {
 		data: [],
-		status: {},
+		status: '',
 		response: {},
 		error: '',
 	},
 	languages: {
 		data: [],
-		status: {},
+		status: '',
 		response: {},
 		error: '',
 	},

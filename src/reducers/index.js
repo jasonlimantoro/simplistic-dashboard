@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import confidentialitiesReducer from './confidentialitiesReducer';
-import doctypesReducer from './doctypesReducer';
-import languagesReducer from './languagesReducer';
+import confidentialities from './confidentialitiesReducer';
+import doctypes from './doctypesReducer';
+import languages from './languagesReducer';
 
 export default combineReducers({
-	confidentialitiesReducer,
-	doctypesReducer,
-	languagesReducer,
+	confidentialities,
+	doctypes,
+	languages,
 });

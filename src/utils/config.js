@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiEndPoint = `${process.env.REACT_APP_BACKEND_HOST}:${process.env.REACT_APP_BACKEND_PORT}/api`;
+const apiEndPoint = '/data';
 
 const createAxios = () => {
 	const defaultOptions = {
@@ -14,4 +14,5 @@ const createAxios = () => {
 
 export const CONFIG = {
 	AXIOS: createAxios(),
+	API_ENDPOINT: '/data',
 };

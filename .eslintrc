@@ -55,6 +55,7 @@
     "prefer-destructuring": 0,
     "one-var": 0,
     "one-var-declaration-per-line": 0,
+    "prefer-promise-reject-errors": 0,
     "eqeqeq": 0,
     "max-len": 0,
     "semi": "warn",

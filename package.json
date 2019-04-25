@@ -44,6 +44,23 @@
       "git add"
     ]
   },
+  "commitlint": {
+    "rules": {
+      "type-enum": [2, "always", [
+        "build",
+        "ci",
+        "chore",
+        "docs",
+        "feat",
+        "fix",
+        "perf",
+        "refactor",
+        "style",
+        "test",
+        "config"
+      ]]
+    }
+  },
   "browserslist": [
     ">0.2%",
     "not dead",

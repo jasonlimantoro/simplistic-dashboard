@@ -8,17 +8,15 @@ import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 
+import { selectAccumulatedTotalDocs, selectConfidentialities } from '../reducers';
 import { fetchConfidentialities } from '../actions/confidentialities.actions';
 import Master from '../layouts/Master';
 
-const Confidentialities = ({ confidentialities, fetchConfidentialities }) => {
+const Confidentialities = ({ confidentialities, accumulatedTotalDocs, fetchConfidentialities }) => {
 	useEffect(() => {
 		fetchConfidentialities();
 	}, []);
 	
-	const computeTotal = () => {
-		return confidentialities.map(({ total_docs }) => total_docs).reduce((sum, i) => sum + i, 0);
-	};
 	return (
 		<Master headerTitle='Confidentialities'>
 			<Paper>
@@ -41,7 +39,7 @@ const Confidentialities = ({ confidentialities, fetchConfidentialities }) => {
 						<TableRow>
 							<TableCell />
 							<TableCell>Total</TableCell>
-							<TableCell>{computeTotal()}</TableCell>
+							<TableCell>{accumulatedTotalDocs}</TableCell>
 						</TableRow>
 					</TableBody>
 				</Table>
@@ -50,18 +48,13 @@ const Confidentialities = ({ confidentialities, fetchConfidentialities }) => {
 	);
 };
 
-const mapStateToProps = ({ confidentialities: { data } }) => {
+const mapStateToProps = (state) => {
 	return {
-		confidentialities: data,
-	};
-};
-
-const mapDispatchToProps = dispatch => {
-	return {
-		fetchConfidentialities: () => dispatch(fetchConfidentialities()),
+		confidentialities: selectConfidentialities(state),
+		accumulatedTotalDocs: selectAccumulatedTotalDocs(state),
 	};
 };
 
 export default compose(
-	connect(mapStateToProps, mapDispatchToProps)
+	connect(mapStateToProps, { fetchConfidentialities })
 )(Confidentialities);

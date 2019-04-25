@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import confidentialities from './confidentialities.reducer';
+import confidentialities, * as confidentialitiesReducer from './confidentialities.reducer';
 import doctypes from './doctypes.reducer';
 import languages from './languages.reducer';
 
@@ -9,3 +9,9 @@ export default combineReducers({
 	doctypes,
 	languages,
 });
+
+export const selectAccumulatedTotalDocs = (state) =>
+	confidentialitiesReducer.selectAccumulatedTotalDocs(state.confidentialities);
+
+export const selectConfidentialities = state =>
+	confidentialitiesReducer.selectConfidentialities(state.confidentialities);

@@ -53,6 +53,7 @@
     "no-plusplus": 0,
     "consistent-return": 0,
     "prefer-destructuring": 0,
+    "implicit-arrow-linebreak": 0,
     "one-var": 0,
     "one-var-declaration-per-line": 0,
     "prefer-promise-reject-errors": 0,

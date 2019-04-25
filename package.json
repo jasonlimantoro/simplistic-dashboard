@@ -46,18 +46,18 @@
   },
   "commitlint": {
     "rules": {
+      "type-case": [2, "always", "upper-case"],
       "type-enum": [2, "always", [
-        "build",
-        "ci",
-        "chore",
-        "docs",
-        "feat",
-        "fix",
-        "perf",
-        "refactor",
-        "style",
-        "test",
-        "config"
+        "BUILD",
+        "CI",
+        "CHORE",
+        "DOCS",
+        "FEAT",
+        "FIX",
+        "REFACTOR",
+        "STYLE",
+        "TEST",
+        "CONFIG"
       ]]
     }
   },

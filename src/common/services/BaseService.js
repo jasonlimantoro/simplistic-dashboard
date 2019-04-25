@@ -1,12 +1,8 @@
-import { CONFIG } from '../../utils/config';
+import UtilService from './UtilService';
 
 export default class BaseService {
-	request = (path, method = 'get') => {
-		switch (method) {
-			case 'get':
-				return CONFIG.AXIOS.get(path);
-			default:
-				return Promise.reject(new Error('Method not allowed!'));
-		}
+	constructor({ baseUrl = '', ServiceUtil = UtilService }) {
+		this._baseUrl = baseUrl;
+		this._util = new ServiceUtil({ baseUrl });
 	}
 }

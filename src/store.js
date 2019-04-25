@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import rootReducer from './reducers';
 
-const configureStore = (preloadedState) => {
+const configureStore = (preloadedState = {}) => {
 	const middlewares = [thunkMiddleware];
 	const middlewareEnhancer = applyMiddleware(...middlewares);
 	
@@ -14,27 +14,6 @@ const configureStore = (preloadedState) => {
 	return createStore(rootReducer, preloadedState, composedEnhancers);
 };
 
-export const preloadedState = {
-	confidentialities: {
-		data: [],
-		status: '',
-		response: {},
-		error: '',
-	},
-	doctypes: {
-		data: [],
-		status: '',
-		response: {},
-		error: '',
-	},
-	languages: {
-		data: [],
-		status: '',
-		response: {},
-		error: '',
-	},
-};
-
-const store = configureStore(preloadedState);
+const store = configureStore();
 
 export default store;

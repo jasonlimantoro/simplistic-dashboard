@@ -8,12 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 
-import {
-	selectAccumulatedTotalDocs,
-	selectConfidentialities,
-	selectConfidentialitiesError,
-	selectConfidentialitiesStatus,
-} from '../reducers';
+import { selectConfidentialities } from '../reducers';
 import { fetchConfidentialities } from '../actions/confidentialities.actions';
 import Master from '../layouts/Master';
 import Async from '../common/components/Api/Async';
@@ -63,10 +58,10 @@ const Confidentialities = ({
 
 const mapStateToProps = (state) => {
 	return {
-		confidentialities: selectConfidentialities(state),
-		accumulatedTotalDocs: selectAccumulatedTotalDocs(state),
-		error: selectConfidentialitiesError(state),
-		status: selectConfidentialitiesStatus(state),
+		confidentialities: selectConfidentialities.data(state),
+		accumulatedTotalDocs: selectConfidentialities.accumulatedTotalDocs(state),
+		error: selectConfidentialities.error(state),
+		status: selectConfidentialities.status(state),
 	};
 };
 

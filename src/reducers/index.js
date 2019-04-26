@@ -10,14 +10,16 @@ export default combineReducers({
 	languages,
 });
 
-export const selectAccumulatedTotalDocs = (state) =>
-	confidentialitiesReducer.selectAccumulatedTotalDocs(state.confidentialities);
+export const selectConfidentialities = {
+	accumulatedTotalDocs: (state) =>
+		confidentialitiesReducer.selectAccumulatedTotalDocs(state.confidentialities),
 
-export const selectConfidentialities = state =>
-	confidentialitiesReducer.selectConfidentialities(state.confidentialities);
+	data: state =>
+		confidentialitiesReducer.selectConfidentialities(state.confidentialities),
 
-export const selectConfidentialitiesError = state =>
-	confidentialitiesReducer.selectError(state.confidentialities);
+	error: state =>
+		confidentialitiesReducer.selectError(state.confidentialities),
 
-export const selectConfidentialitiesStatus = state =>
-	confidentialitiesReducer.selectStatus(state.confidentialities);
+	status: state =>
+		confidentialitiesReducer.selectStatus(state.confidentialities),
+};

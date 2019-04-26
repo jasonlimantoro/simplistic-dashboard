@@ -1,15 +1,10 @@
 /**
  * Factory for resource-based reducer
  * @param {String} resource Resource the reducer belongs to
+ * @param {Object} initialState Initial state of the reducer
  * @returns {Function} Reducer function
  */
-export const createReducer = resource => {
-	const initialState = {
-		data: [],
-		status: '',
-		response: {},
-		error: '',
-	};
+export const createReducer = (resource, initialState = {}) => {
 	return (state = initialState, action) => {
 		switch (action.type) {
 			case `FETCH_${resource.toUpperCase()}_REQUEST`:

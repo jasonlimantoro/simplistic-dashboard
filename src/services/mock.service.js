@@ -1,7 +1,7 @@
 import UtilService from '../common/services/UtilService';
 import { wait } from '../common/utils/async';
 import { randomInt } from '../common/utils/random';
-import confidentialities from '../data/confidentiality_data';
+import { confidentialities, doctypes } from '../data';
 
 export default class MockService extends UtilService {
 	/**
@@ -24,6 +24,13 @@ export default class MockService extends UtilService {
 					return confidentialities;
 				}
 				return Promise.reject({ message: 'SERVER_ERROR' });
+				
+			case path.includes('/doctypes'):
+				if (method.toUpperCase() === 'GET') {
+					return doctypes;
+				}
+				throw new Error('SERVER_ERROR');
+				
 			default:
 				return Promise.reject({ message: 'SERVER_ERROR', options });
 		}

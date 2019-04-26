@@ -3,8 +3,6 @@ import { createSelector } from 'reselect';
 
 import { createReducer } from '../common/factories/reducers/resource.reducer';
 
-import * as confidentialitiesReducer from './confidentialities.reducer';
-
 export default combineReducers({
 	confidentialities: createReducer('confidentialities'),
 	doctypes: createReducer('doctypes'),
@@ -15,10 +13,15 @@ export default combineReducers({
 const createSelectData = resource => state => state[resource].data;
 const createSelectError = resource => state => state[resource].error;
 const createSelectStatus = resource => state => state[resource].status;
+const createSelectAccumulatedTotalDocs = resource =>
+	state => createSelectData(resource)(state).map(({ total_docs }) => total_docs);
 
 export const selectConfidentialities = {
 	accumulatedTotalDocs: (state) =>
-		confidentialitiesReducer.selectAccumulatedTotalDocs(state.confidentialities),
+		createSelector(
+			createSelectAccumulatedTotalDocs('confidentialities'),
+			subtotal => subtotal.reduce((sum, i) => sum + i, 0)
+		)(state),
 
 	data: state =>
 		createSelector(
@@ -36,5 +39,31 @@ export const selectConfidentialities = {
 		createSelector(
 			createSelectStatus('confidentialities'),
 			status => status
+		)(state),
+};
+
+export const selectDoctypes = {
+	accumulatedTotalDocs: state =>
+		createSelector(
+			createSelectAccumulatedTotalDocs('doctypes'),
+			subtotal => subtotal.reduce((sum, i) => sum + i, 0)
+		)(state),
+	
+	data: state =>
+		createSelector(
+			createSelectData('doctypes'),
+			doctypes => doctypes
+		)(state),
+	
+	status: state =>
+		createSelector(
+			createSelectStatus('doctypes'),
+			status => status
+		)(state),
+	
+	error: state =>
+		createSelector(
+			createSelectError('doctypes'),
+			error => error
 		)(state),
 };

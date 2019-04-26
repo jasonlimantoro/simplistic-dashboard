@@ -15,3 +15,9 @@ export const selectAccumulatedTotalDocs = (state) =>
 
 export const selectConfidentialities = state =>
 	confidentialitiesReducer.selectConfidentialities(state.confidentialities);
+
+export const selectConfidentialitiesError = state =>
+	confidentialitiesReducer.selectError(state.confidentialities);
+
+export const selectConfidentialitiesStatus = state =>
+	confidentialitiesReducer.selectStatus(state.confidentialities);

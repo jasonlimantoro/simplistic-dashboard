@@ -8,17 +8,30 @@ import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 
-import { selectAccumulatedTotalDocs, selectConfidentialities } from '../reducers';
+import {
+	selectAccumulatedTotalDocs,
+	selectConfidentialities,
+	selectConfidentialitiesError,
+	selectConfidentialitiesStatus,
+} from '../reducers';
 import { fetchConfidentialities } from '../actions/confidentialities.actions';
 import Master from '../layouts/Master';
+import Async from '../common/components/Api/Async';
 
-const Confidentialities = ({ confidentialities, accumulatedTotalDocs, fetchConfidentialities }) => {
+const Confidentialities = ({
+	confidentialities,
+	accumulatedTotalDocs,
+	fetchConfidentialities,
+	error,
+	status,
+}) => {
 	useEffect(() => {
 		fetchConfidentialities();
 	}, []);
 	
 	return (
 		<Master headerTitle='Confidentialities'>
+			<Async error={error} loading={status === 'loading'} onRetry={fetchConfidentialities} />
 			<Paper>
 				<Table>
 					<TableHead>
@@ -52,6 +65,8 @@ const mapStateToProps = (state) => {
 	return {
 		confidentialities: selectConfidentialities(state),
 		accumulatedTotalDocs: selectAccumulatedTotalDocs(state),
+		error: selectConfidentialitiesError(state),
+		status: selectConfidentialitiesStatus(state),
 	};
 };
 

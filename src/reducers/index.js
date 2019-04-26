@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { createSelector } from 'reselect';
 
 import { createReducer } from '../common/factories/reducers/resource.reducer';
+import { accum } from '../utils/helpers';
 
 export default combineReducers({
 	confidentialities: createReducer('confidentialities'),
@@ -20,7 +21,7 @@ export const selectConfidentialities = {
 	accumulatedTotalDocs: (state) =>
 		createSelector(
 			createSelectAccumulatedTotalDocs('confidentialities'),
-			subtotal => subtotal.reduce((sum, i) => sum + i, 0)
+			subtotal => accum(subtotal)
 		)(state),
 
 	data: state =>
@@ -46,7 +47,7 @@ export const selectDoctypes = {
 	accumulatedTotalDocs: state =>
 		createSelector(
 			createSelectAccumulatedTotalDocs('doctypes'),
-			subtotal => subtotal.reduce((sum, i) => sum + i, 0)
+			subtotal => accum(subtotal)
 		)(state),
 	
 	data: state =>

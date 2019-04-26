@@ -15,12 +15,14 @@ const confidentialitiesReducer = (state = initialState, action) => {
 			return {
 				...state,
 				status: 'loading',
+				error: '',
 			};
 		case CONFIDENTIALITIES.FETCH.SUCCESS:
 			return {
 				...state,
 				status: 'success',
 				data: action.confidentialities,
+				error: '',
 			};
 		case CONFIDENTIALITIES.FETCH.ERROR:
 			return {
@@ -42,3 +44,6 @@ const selectTotalDocs = state => selectData(state).map(({ total_docs }) => total
 export const selectAccumulatedTotalDocs = createSelector(
 	selectTotalDocs, subtotal => subtotal.reduce((sum, i) => sum + i, 0)
 );
+
+export const selectError = createSelector(state => state.error, error => error);
+export const selectStatus = createSelector(state => state.status, status => status);

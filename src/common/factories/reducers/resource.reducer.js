@@ -22,7 +22,7 @@ export const createReducer = resource => {
 				return {
 					...state,
 					status: 'success',
-					data: action.confidentialities,
+					data: action[resource],
 					error: '',
 				};
 			case `FETCH_${resource.toUpperCase()}_ERROR`:

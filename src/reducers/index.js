@@ -1,25 +1,40 @@
 import { combineReducers } from 'redux';
+import { createSelector } from 'reselect';
 
-import confidentialities, * as confidentialitiesReducer from './confidentialities.reducer';
-import doctypes from './doctypes.reducer';
-import languages from './languages.reducer';
+import { createReducer } from '../common/factories/reducers/resource.reducer';
+
+import * as confidentialitiesReducer from './confidentialities.reducer';
 
 export default combineReducers({
-	confidentialities,
-	doctypes,
-	languages,
+	confidentialities: createReducer('confidentialities'),
+	doctypes: createReducer('doctypes'),
+	languages: createReducer('languages'),
 });
+
+// Selectors
+const createSelectData = resource => state => state[resource].data;
+const createSelectError = resource => state => state[resource].error;
+const createSelectStatus = resource => state => state[resource].status;
 
 export const selectConfidentialities = {
 	accumulatedTotalDocs: (state) =>
 		confidentialitiesReducer.selectAccumulatedTotalDocs(state.confidentialities),
 
 	data: state =>
-		confidentialitiesReducer.selectConfidentialities(state.confidentialities),
+		createSelector(
+			createSelectData('confidentialities'),
+			confidentialities => confidentialities
+		)(state),
 
 	error: state =>
-		confidentialitiesReducer.selectError(state.confidentialities),
+		createSelector(
+			createSelectError('confidentialities'),
+			error => error
+		)(state),
 
 	status: state =>
-		confidentialitiesReducer.selectStatus(state.confidentialities),
+		createSelector(
+			createSelectStatus('confidentialities'),
+			status => status
+		)(state),
 };

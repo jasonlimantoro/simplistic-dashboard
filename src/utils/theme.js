@@ -62,6 +62,11 @@ theme = {
 				},
 			},
 		},
+		MuiTable: {
+			root: {
+				tableLayout: 'fixed',
+			},
+		},
 		MuiTooltip: {
 			tooltip: {
 				borderRadius: 4,

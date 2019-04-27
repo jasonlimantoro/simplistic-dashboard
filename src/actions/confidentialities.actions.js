@@ -11,3 +11,10 @@ export const fetchConfidentialities = createAsyncActionCreators(
 	'fetch',
 	() => () => service.get()
 );
+
+export const filterConfidentialities = (filter) => {
+	return {
+		type: 'SET_FILTER',
+		filter,
+	};
+};

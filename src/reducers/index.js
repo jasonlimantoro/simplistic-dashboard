@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import { createReducer } from '../common/factories/reducers/resource.reducer';
 
 import confidentialities, {
-	selectConfidentialitiesData,
+	selectFilteredConfidentialities,
 	selectConfidentialitiesStatus,
 	selectConfidentialitiesError,
 	selectConfidentialitiesAccumulatedTotalDocs,
@@ -24,7 +24,7 @@ export default combineReducers({
 // Selectors
 export const selectConfidentialities = {
 	accumulatedTotalDocs: state => selectConfidentialitiesAccumulatedTotalDocs(state.confidentialities),
-	data: state => selectConfidentialitiesData(state.confidentialities),
+	data: state => selectFilteredConfidentialities(state.confidentialities),
 	error: state => selectConfidentialitiesError(state.confidentialities),
 	status: state => selectConfidentialitiesStatus(state.confidentialities),
 };

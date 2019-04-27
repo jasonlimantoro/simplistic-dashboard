@@ -22,13 +22,13 @@ const filterReducer = (state = '', action) => {
 
 
 export default combineReducers({
-	confidentialities: confidentialitiesReducer,
+	api: confidentialitiesReducer,
 	filter: filterReducer,
 });
 
-const selectData = state => state.confidentialities.data;
-const selectStatus = state => state.confidentialities.status;
-const selectError = state => state.confidentialities.error;
+const selectData = state => state.api.data;
+const selectStatus = state => state.api.status;
+const selectError = state => state.api.error;
 const selectFilter = state => state.filter;
 
 export const selectFilteredConfidentialities = createSelector(

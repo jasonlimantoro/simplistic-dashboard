@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { combineReducers } from 'redux';
 
 import { createReducer } from '../common/factories/reducers/resource.reducer';
-import { accum } from '../utils/helpers';
+import { accum, includesIn } from '../utils/helpers';
 
 const confidentialitiesReducer = createReducer('confidentialities', {
 	data: [],
@@ -33,7 +33,7 @@ const selectFilter = state => state.filter;
 
 export const selectFilteredConfidentialities = createSelector(
 	selectFilter, selectData,
-	(filter, data) => data.filter(({ name }) => name.toLowerCase().includes(filter.toLowerCase()))
+	(filter, data) => data.filter(({ name }) => includesIn(name, filter))
 );
 export const selectConfidentialitiesAccumulatedTotalDocs = createSelector(
 	selectFilteredConfidentialities, (data) => {

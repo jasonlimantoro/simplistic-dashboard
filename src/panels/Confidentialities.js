@@ -1,62 +1,18 @@
 import React, { useEffect } from 'react';
-import InputBase from '@material-ui/core/InputBase';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import SearchIcon from '@material-ui/icons/Search';
 import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { withStyles } from '@material-ui/core/styles';
-import { fade } from '@material-ui/core/styles/colorManipulator';
 
 import { selectConfidentialities } from '../reducers';
 import { fetchConfidentialities, filterConfidentialities } from '../actions/confidentialities.actions';
 import Master from '../layouts/Master';
 import Async from '../common/components/Api/Async';
-
-const styles = theme => ({
-	search: {
-		position: 'relative',
-		borderRadius: theme.shape.borderRadius,
-		backgroundColor: fade(theme.palette.common.white, 0.15),
-		'&:hover': {
-			backgroundColor: fade(theme.palette.common.white, 0.25),
-		},
-		marginLeft: 0,
-		width: '100%',
-		[theme.breakpoints.up('sm')]: {
-			width: 'auto',
-		},
-	},
-	searchIcon: {
-		width: theme.spacing.unit * 9,
-		height: '100%',
-		position: 'absolute',
-		pointerEvents: 'none',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	inputRoot: {
-		color: 'inherit',
-		width: '100%',
-		padding: 5,
-	},
-	inputInput: {
-		paddingTop: theme.spacing.unit,
-		paddingRight: theme.spacing.unit,
-		paddingBottom: theme.spacing.unit,
-		paddingLeft: theme.spacing.unit * 10,
-		transition: theme.transitions.create('width'),
-		width: '100%',
-		[theme.breakpoints.up('sm')]: {
-			width: 120,
-		},
-	},
-});
+import SearchBar from '../components/SearchBar';
 
 const Confidentialities = ({
 	confidentialities,
@@ -65,7 +21,6 @@ const Confidentialities = ({
 	filterConfidentialities,
 	error,
 	status,
-	classes,
 }) => {
 	
 	useEffect(() => {
@@ -85,19 +40,7 @@ const Confidentialities = ({
 					<TableHead>
 						<TableRow>
 							<TableCell colSpan={3}>
-								<div className={classes.search}>
-									<div className={classes.searchIcon}>
-										<SearchIcon />
-									</div>
-									<InputBase
-										placeholder='Search…'
-										classes={{
-											root: classes.inputRoot,
-											input: classes.inputInput,
-										}}
-										onChange={handleChange}
-									/>
-								</div>
+								<SearchBar inputProps={{ placeholder: 'Search name ...' }} handleChangeSearch={handleChange} />
 							</TableCell>
 						</TableRow>
 						<TableRow>
@@ -137,5 +80,4 @@ const mapStateToProps = (state) => {
 
 export default compose(
 	connect(mapStateToProps, { fetchConfidentialities, filterConfidentialities }),
-	withStyles(styles),
 )(Confidentialities);

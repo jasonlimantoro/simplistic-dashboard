@@ -47,7 +47,7 @@ const styles = theme => ({
 	},
 });
 
-const SearchBar = ({ handleChangeSearch, inputProps, classes }) => {
+const SearchBar = ({ inputProps, classes }) => {
 	return (
 		<Fragment>
 			<div className={classes.search}>
@@ -60,7 +60,6 @@ const SearchBar = ({ handleChangeSearch, inputProps, classes }) => {
 						input: classes.inputInput,
 					}}
 					inputProps={inputProps}
-					onChange={handleChangeSearch}
 				/>
 			</div>
 		</Fragment>
@@ -69,7 +68,6 @@ const SearchBar = ({ handleChangeSearch, inputProps, classes }) => {
 
 SearchBar.propTypes = {
 	classes: PropTypes.object.isRequired,
-	handleChangeSearch: PropTypes.func.isRequired,
 	inputProps: PropTypes.object,
 };
 

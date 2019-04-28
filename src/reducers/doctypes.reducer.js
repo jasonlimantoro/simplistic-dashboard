@@ -1,7 +1,8 @@
 import { createSelector } from 'reselect';
+import { combineReducers } from 'redux';
 
 import { createReducer } from '../common/factories/reducers/resource.reducer';
-import { accum } from '../utils/helpers';
+import { accum, includesIn } from '../utils/helpers';
 
 const doctypesReducer = createReducer('doctypes', {
 	data: [],
@@ -10,16 +11,34 @@ const doctypesReducer = createReducer('doctypes', {
 	error: '',
 });
 
-export default doctypesReducer;
+export const filterReducer = (state = '', action) => {
+	switch (action.type) {
+		case 'SET_FILTER':
+			return action.filter;
+		default:
+			return state;
+	}
+};
 
-const selectData = state => state.data;
-const selectStatus = state => state.status;
-const selectError = state => state.error;
-const selectTotalDocs = state => selectData(state).map(({ total_docs }) => total_docs);
+export default combineReducers({
+	api: doctypesReducer,
+	filter: filterReducer,
+});
 
-export const selectDoctypesAccumulatedTotalDocs = createSelector(
-	selectTotalDocs, subtotal => accum(subtotal)
+const selectData = state => state.api.data;
+const selectStatus = state => state.api.status;
+const selectError = state => state.api.error;
+const selectFilter = state => state.filter;
+
+export const selectDoctypesFilteredData = createSelector(
+	selectData, selectFilter,
+	(data, filter) => data.filter(({ name }) => includesIn(name, filter))
 );
-export const selectDoctypesData = createSelector(selectData, doctypes => doctypes);
+export const selectDoctypesFilteredAccumulatedTotalDocs = createSelector(
+	selectDoctypesFilteredData, (data) => {
+		const selectTotalDocs = state => state.map(({ total_docs }) => total_docs);
+		return accum(selectTotalDocs(data));
+	}
+);
 export const selectDoctypesError = createSelector(selectError, error => error);
 export const selectDoctypesStatus = createSelector(selectStatus, status => status);

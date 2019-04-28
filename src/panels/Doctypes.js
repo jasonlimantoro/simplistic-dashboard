@@ -10,13 +10,15 @@ import { connect } from 'react-redux';
 
 import Master from '../layouts/Master';
 import Async from '../common/components/Api/Async';
-import { fetchDoctypes } from '../actions/doctypes.actions';
+import { fetchDoctypes, filterDoctypes } from '../actions/doctypes.actions';
 import { selectDoctypes } from '../reducers';
+import SearchBar from '../components/SearchBar';
 
 const Doctypes = ({
 	status,
 	error,
 	fetchDoctypes,
+	filterDoctypes,
 	doctypes,
 	accumulatedTotalDocs,
 }) => {
@@ -24,12 +26,23 @@ const Doctypes = ({
 	useEffect(() => {
 		fetchDoctypes();
 	}, []);
+	
+	const handleChange = e => {
+		const { value } = e.target;
+		filterDoctypes(value);
+	};
+	
 	return (
 		<Master headerTitle='Doctypes'>
 			<Async error={error} loading={status === 'loading'} onRetry={fetchDoctypes} />
 			<Paper>
 				<Table>
 					<TableHead>
+						<TableRow>
+							<TableCell colSpan={2}>
+								<SearchBar inputProps={{ placeholder: 'Search name ...' }} handleChangeSearch={handleChange} />
+							</TableCell>
+						</TableRow>
 						<TableRow>
 							<TableCell>Name</TableCell>
 							<TableCell>Total Docs</TableCell>
@@ -61,5 +74,5 @@ export const mapStateProps = state => ({
 });
 
 export default compose(
-	connect(mapStateProps, { fetchDoctypes })
+	connect(mapStateProps, { fetchDoctypes, filterDoctypes })
 )(Doctypes);

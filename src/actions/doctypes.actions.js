@@ -9,3 +9,10 @@ export const fetchDoctypes = createAsyncActionCreators(
 	'fetch',
 	() => () => service.get()
 );
+
+export const filterDoctypes = (filter) => {
+	return {
+		type: 'SET_FILTER',
+		filter,
+	};
+};

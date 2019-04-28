@@ -9,10 +9,10 @@ import confidentialities, {
 	selectConfidentialitiesAccumulatedTotalDocs,
 } from './confidentialities.reducer';
 import doctypes, {
-	selectDoctypesData,
+	selectDoctypesFilteredData,
 	selectDoctypesStatus,
 	selectDoctypesError,
-	selectDoctypesAccumulatedTotalDocs,
+	selectDoctypesFilteredAccumulatedTotalDocs,
 } from './doctypes.reducer';
 
 export default combineReducers({
@@ -30,8 +30,8 @@ export const selectConfidentialities = {
 };
 
 export const selectDoctypes = {
-	accumulatedTotalDocs: state => selectDoctypesAccumulatedTotalDocs(state.doctypes),
-	data: state => selectDoctypesData(state.doctypes),
+	accumulatedTotalDocs: state => selectDoctypesFilteredAccumulatedTotalDocs(state.doctypes),
+	data: state => selectDoctypesFilteredData(state.doctypes),
 	status: state => selectDoctypesStatus(state.doctypes),
 	error: state => selectDoctypesError(state.doctypes),
 };

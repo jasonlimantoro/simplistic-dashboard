@@ -47,10 +47,10 @@ const styles = theme => ({
 	},
 });
 
-const SearchBar = ({ inputProps, classes }) => {
+const SearchBar = ({ inputProps, classes, ...rest }) => {
 	return (
 		<Fragment>
-			<div className={classes.search}>
+			<div className={classes.search} {...rest}>
 				<div className={classes.searchIcon}>
 					<SearchIcon />
 				</div>

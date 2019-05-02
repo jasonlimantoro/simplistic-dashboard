@@ -1,11 +1,6 @@
 import { combineReducers } from 'redux';
 
-import confidentialities, {
-	selectFilteredConfidentialities,
-	selectConfidentialitiesStatus,
-	selectConfidentialitiesError,
-	selectConfidentialitiesAccumulatedTotalDocs,
-} from './confidentialities.reducer';
+import confidentialities, * as confidentialitiesReducer from './confidentialities.reducer';
 import doctypes, {
 	selectDoctypesFilteredData,
 	selectDoctypesStatus,
@@ -25,10 +20,10 @@ export default combineReducers({
 
 // Selectors
 export const selectConfidentialities = {
-	accumulatedTotalDocs: state => selectConfidentialitiesAccumulatedTotalDocs(state.confidentialities),
-	data: state => selectFilteredConfidentialities(state.confidentialities),
-	error: state => selectConfidentialitiesError(state.confidentialities),
-	status: state => selectConfidentialitiesStatus(state.confidentialities),
+	accumulatedTotalDocs: state => confidentialitiesReducer.selectAccumulatedTotalDocs(state.confidentialities),
+	data: state => confidentialitiesReducer.selectData(state.confidentialities),
+	error: state => confidentialitiesReducer.selectError(state.confidentialities),
+	status: state => confidentialitiesReducer.selectStatus(state.confidentialities),
 };
 
 export const selectDoctypes = {

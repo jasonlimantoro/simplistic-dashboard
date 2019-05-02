@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
@@ -23,6 +24,8 @@ const Confidentialities = ({
 	status,
 }) => {
 	
+	const [search, setSearch] = useState('');
+	
 	useEffect(() => {
 		fetchConfidentialities();
 	}, []);
@@ -30,17 +33,21 @@ const Confidentialities = ({
 	const handleChange = e => {
 		const { value } = e.target;
 		filterConfidentialities(value);
+		setSearch(value);
 	};
 	
 	return (
 		<Master headerTitle='Confidentialities'>
 			<Async error={error} loading={status === 'loading'} onRetry={fetchConfidentialities} />
+			<Typography component='p'>{confidentialities.length} results matching <code>"{search}"</code></Typography>
 			<Paper>
 				<Table>
 					<TableHead>
 						<TableRow>
 							<TableCell colSpan={3}>
-								<SearchBar inputProps={{ placeholder: 'Search name ...' }} handleChangeSearch={handleChange} />
+								<SearchBar
+									inputProps={{ placeholder: 'Search name ...', value: search, onChange: handleChange }}
+								/>
 							</TableCell>
 						</TableRow>
 						<TableRow>

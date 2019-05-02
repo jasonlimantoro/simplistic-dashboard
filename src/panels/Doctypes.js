@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
+import Typography from '@material-ui/core/Typography';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
@@ -23,6 +24,8 @@ const Doctypes = ({
 	accumulatedTotalDocs,
 }) => {
 	
+	const [search, setSearch] = useState('');
+	
 	useEffect(() => {
 		fetchDoctypes();
 	}, []);
@@ -30,17 +33,21 @@ const Doctypes = ({
 	const handleChange = e => {
 		const { value } = e.target;
 		filterDoctypes(value);
+		setSearch(value);
 	};
 	
 	return (
 		<Master headerTitle='Doctypes'>
 			<Async error={error} loading={status === 'loading'} onRetry={fetchDoctypes} />
+			<Typography component='p'>{doctypes.length} results matching <code>"{search}"</code></Typography>
 			<Paper>
 				<Table>
 					<TableHead>
 						<TableRow>
 							<TableCell colSpan={2}>
-								<SearchBar inputProps={{ placeholder: 'Search name ...' }} handleChangeSearch={handleChange} />
+								<SearchBar
+									inputProps={{ placeholder: 'Search name ...', onChange: handleChange }}
+								/>
 							</TableCell>
 						</TableRow>
 						<TableRow>

@@ -41,12 +41,12 @@ const Confidentialities = ({
 			<Async error={error} loading={status === 'loading'} onRetry={fetchConfidentialities} />
 			<Typography component='p'>{data.length} results matching <code>"{search}"</code></Typography>
 			<Paper>
-				<Table>
+				<Table data-testid='confidentialities-table'>
 					<TableHead>
 						<TableRow>
 							<TableCell colSpan={3}>
 								<SearchBar
-									inputProps={{ placeholder: 'Search name ...', value: search, onChange: handleChange }}
+									inputProps={{ placeholder: 'Search name ...', value: search, onChange: handleChange, name: 'search' }}
 								/>
 							</TableCell>
 						</TableRow>

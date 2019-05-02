@@ -40,13 +40,13 @@ const Doctypes = ({
 		<Master headerTitle='Doctypes'>
 			<Async error={error} loading={status === 'loading'} onRetry={fetchDoctypes} />
 			<Typography component='p'>{data.length} results matching <code>"{search}"</code></Typography>
-			<Paper>
+			<Paper data-testid='doctypes-table'>
 				<Table>
 					<TableHead>
 						<TableRow>
 							<TableCell colSpan={2}>
 								<SearchBar
-									inputProps={{ placeholder: 'Search name ...', onChange: handleChange }}
+									inputProps={{ placeholder: 'Search name ...', onChange: handleChange, name: 'search' }}
 								/>
 							</TableCell>
 						</TableRow>

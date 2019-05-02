@@ -16,7 +16,7 @@ import Async from '../common/components/Api/Async';
 import SearchBar from '../components/SearchBar';
 
 const Confidentialities = ({
-	confidentialities,
+	data,
 	accumulatedTotalDocs,
 	fetchConfidentialities,
 	filterConfidentialities,
@@ -39,7 +39,7 @@ const Confidentialities = ({
 	return (
 		<Master headerTitle='Confidentialities'>
 			<Async error={error} loading={status === 'loading'} onRetry={fetchConfidentialities} />
-			<Typography component='p'>{confidentialities.length} results matching <code>"{search}"</code></Typography>
+			<Typography component='p'>{data.length} results matching <code>"{search}"</code></Typography>
 			<Paper>
 				<Table>
 					<TableHead>
@@ -57,7 +57,7 @@ const Confidentialities = ({
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{confidentialities.map(c => (
+						{data.map(c => (
 							<TableRow key={c.id}>
 								<TableCell>{c.id}</TableCell>
 								<TableCell>{c.name}</TableCell>
@@ -78,7 +78,7 @@ const Confidentialities = ({
 
 const mapStateToProps = (state) => {
 	return {
-		confidentialities: selectConfidentialities.data(state),
+		data: selectConfidentialities.data(state),
 		accumulatedTotalDocs: selectConfidentialities.accumulatedTotalDocs(state),
 		error: selectConfidentialities.error(state),
 		status: selectConfidentialities.status(state),

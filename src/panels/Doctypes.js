@@ -20,7 +20,7 @@ const Doctypes = ({
 	error,
 	fetchDoctypes,
 	filterDoctypes,
-	doctypes,
+	data,
 	accumulatedTotalDocs,
 }) => {
 	
@@ -39,7 +39,7 @@ const Doctypes = ({
 	return (
 		<Master headerTitle='Doctypes'>
 			<Async error={error} loading={status === 'loading'} onRetry={fetchDoctypes} />
-			<Typography component='p'>{doctypes.length} results matching <code>"{search}"</code></Typography>
+			<Typography component='p'>{data.length} results matching <code>"{search}"</code></Typography>
 			<Paper>
 				<Table>
 					<TableHead>
@@ -56,7 +56,7 @@ const Doctypes = ({
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{doctypes.map(d => (
+						{data.map(d => (
 							<TableRow key={d.name}>
 								<TableCell>{d.name}</TableCell>
 								<TableCell>{d.total_docs}</TableCell>
@@ -75,7 +75,7 @@ const Doctypes = ({
 
 export const mapStateProps = state => ({
 	accumulatedTotalDocs: selectDoctypes.accumulatedTotalDocs(state),
-	doctypes: selectDoctypes.data(state),
+	data: selectDoctypes.data(state),
 	status: selectDoctypes.status(state),
 	error: selectDoctypes.error(state),
 });

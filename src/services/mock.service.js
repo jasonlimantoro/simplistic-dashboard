@@ -1,7 +1,7 @@
 import UtilService from '../common/services/UtilService';
 import { wait } from '../common/utils/async';
 import { randomInt } from '../common/utils/random';
-import { confidentialities, doctypes } from '../data';
+import { confidentialities, doctypes, languages } from '../data';
 
 export default class MockService extends UtilService {
 	/**
@@ -28,6 +28,12 @@ export default class MockService extends UtilService {
 			case path.includes('/doctypes'):
 				if (method.toUpperCase() === 'GET') {
 					return doctypes;
+				}
+				throw new Error('SERVER_ERROR');
+				
+			case path.includes('/languages'):
+				if (method.toUpperCase() === 'GET') {
+					return languages;
 				}
 				throw new Error('SERVER_ERROR');
 				

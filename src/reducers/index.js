@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux';
 
-import { createReducer } from '../common/factories/reducers/resource.reducer';
-
 import confidentialities, {
 	selectFilteredConfidentialities,
 	selectConfidentialitiesStatus,
@@ -14,11 +12,15 @@ import doctypes, {
 	selectDoctypesError,
 	selectDoctypesFilteredAccumulatedTotalDocs,
 } from './doctypes.reducer';
+import languages, {
+	selectLanguagesError, selectLanguagesAccumulatedTotalDocs,
+	selectLanguagesFilteredData, selectLanguagesStatus,
+} from './languages.reducer';
 
 export default combineReducers({
 	confidentialities,
 	doctypes,
-	languages: createReducer('languages'),
+	languages,
 });
 
 // Selectors
@@ -34,4 +36,11 @@ export const selectDoctypes = {
 	data: state => selectDoctypesFilteredData(state.doctypes),
 	status: state => selectDoctypesStatus(state.doctypes),
 	error: state => selectDoctypesError(state.doctypes),
+};
+
+export const selectLanguages = {
+	accumulatedTotalDocs: state => selectLanguagesAccumulatedTotalDocs(state.languages),
+	data: state => selectLanguagesFilteredData(state.languages),
+	status: state => selectLanguagesStatus(state.languages),
+	error: state => selectLanguagesError(state.languages),
 };

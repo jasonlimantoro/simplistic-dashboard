@@ -1,16 +1,8 @@
 import { combineReducers } from 'redux';
 
 import confidentialities, * as confidentialitiesReducer from './confidentialities.reducer';
-import doctypes, {
-	selectDoctypesFilteredData,
-	selectDoctypesStatus,
-	selectDoctypesError,
-	selectDoctypesFilteredAccumulatedTotalDocs,
-} from './doctypes.reducer';
-import languages, {
-	selectLanguagesError, selectLanguagesAccumulatedTotalDocs,
-	selectLanguagesFilteredData, selectLanguagesStatus,
-} from './languages.reducer';
+import doctypes, * as doctypesReducer from './doctypes.reducer';
+import languages, * as languageReducer from './languages.reducer';
 
 export default combineReducers({
 	confidentialities,
@@ -27,15 +19,15 @@ export const selectConfidentialities = {
 };
 
 export const selectDoctypes = {
-	accumulatedTotalDocs: state => selectDoctypesFilteredAccumulatedTotalDocs(state.doctypes),
-	data: state => selectDoctypesFilteredData(state.doctypes),
-	status: state => selectDoctypesStatus(state.doctypes),
-	error: state => selectDoctypesError(state.doctypes),
+	accumulatedTotalDocs: state => doctypesReducer.selectAccumulatedTotalDocs(state.doctypes),
+	data: state => doctypesReducer.selectData(state.doctypes),
+	status: state => doctypesReducer.selectStatus(state.doctypes),
+	error: state => doctypesReducer.selectError(state.doctypes),
 };
 
 export const selectLanguages = {
-	accumulatedTotalDocs: state => selectLanguagesAccumulatedTotalDocs(state.languages),
-	data: state => selectLanguagesFilteredData(state.languages),
-	status: state => selectLanguagesStatus(state.languages),
-	error: state => selectLanguagesError(state.languages),
+	accumulatedTotalDocs: state => languageReducer.selectAccumulatedTotalDocs(state.languages),
+	data: state => languageReducer.selectData(state.languages),
+	status: state => languageReducer.selectStatus(state.languages),
+	error: state => languageReducer.selectError(state.languages),
 };

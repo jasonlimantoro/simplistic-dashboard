@@ -25,22 +25,29 @@ export default combineReducers({
 	filter: filterReducer,
 });
 
-const selectData = state => state.api.data;
-const selectStatus = state => state.api.status;
-const selectError = state => state.api.error;
+let selectData = state => state.api.data;
+let selectStatus = state => state.api.status;
+let selectError = state => state.api.error;
 const selectFilter = state => state.filter;
 
-export const selectLanguagesFilteredData = createSelector(
+selectData = createSelector(
 	selectData, selectFilter,
 	(data, filter) => data.filter(({ name }) => includesIn(name, filter))
 );
 
-export const selectLanguagesAccumulatedTotalDocs = createSelector(
-	selectLanguagesFilteredData, (data) => {
+const selectAccumulatedTotalDocs = createSelector(
+	selectData, (data) => {
 		const selectTotalDocs = state => state.map(({ total_docs }) => total_docs);
 		return accum(selectTotalDocs(data));
 	}
 );
 
-export const selectLanguagesStatus = createSelector(selectStatus, status => status);
-export const selectLanguagesError = createSelector(selectError, error => error);
+selectStatus = createSelector(selectStatus, status => status);
+selectError = createSelector(selectError, error => error);
+
+export {
+	selectData,
+	selectStatus,
+	selectError,
+	selectAccumulatedTotalDocs,
+};

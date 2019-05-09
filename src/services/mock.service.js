@@ -15,9 +15,9 @@ export default class MockService extends UtilService {
 	async request (path, method = 'GET', options = {}) {
 		const delay = randomInt({ min: 1000, max: 3000 });
 		await wait(delay);
-		if (delay > 2500) {
-			return Promise.reject({ message: 'Network Error' });
-		}
+		// if (delay > 2500) {
+		// 	return Promise.reject({ message: 'Network Error' });
+		// }
 		switch (true) {
 			case path.includes('/confidentialities'):
 				if (method.toUpperCase() === 'GET') {

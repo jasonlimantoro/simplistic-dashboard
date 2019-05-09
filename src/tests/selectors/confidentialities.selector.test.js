@@ -4,16 +4,8 @@ import {
 	selectError,
 	selectAccumulatedTotalDocs,
 } from '../../reducers/confidentialities.reducer';
+import { defaultState } from '../utils/constants';
 
-const defaultState = {
-	api: {
-		data: [],
-		status: '',
-		response: {},
-		error: '',
-	},
-	filter: '',
-};
 
 const data = [
 	{ id: 1, name: 'secret', total_docs: 23 },

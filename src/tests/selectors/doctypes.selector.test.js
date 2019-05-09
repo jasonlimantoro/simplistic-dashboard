@@ -4,16 +4,7 @@ import {
 	selectError,
 	selectAccumulatedTotalDocs,
 } from '../../reducers/doctypes.reducer';
-
-const defaultState = {
-	api: {
-		data: [],
-		status: '',
-		response: {},
-		error: '',
-	},
-	filter: '',
-};
+import { defaultState } from '../utils/constants';
 
 const data = [
 	{ id: 1, name: 'secret', total_docs: 23 },

@@ -1,14 +1,5 @@
 import reducer from '../../reducers/confidentialities.reducer';
-
-const defaultState = {
-	api: {
-		data: [],
-		status: '',
-		response: {},
-		error: '',
-	},
-	filter: '',
-};
+import { defaultState } from '../utils/constants';
 
 describe('Confidentialities Reducer', () => {
 	it('should have a valid default state', () => {

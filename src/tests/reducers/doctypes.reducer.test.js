@@ -1,14 +1,5 @@
 import reducer from '../../reducers/doctypes.reducer';
-
-const defaultState = {
-	api: {
-		data: [],
-		status: '',
-		response: {},
-		error: '',
-	},
-	filter: '',
-};
+import { defaultState } from '../utils/constants';
 
 describe('Languages Reducer', () => {
 	it('should have a valid default state', () => {

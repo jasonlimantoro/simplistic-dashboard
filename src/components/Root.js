@@ -5,8 +5,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from '../App';
 import theme from '../utils/theme';
+import defaultStore from '../store';
 
-const Root = ({ store }) => {
+const Root = ({ store = defaultStore }) => {
 	return (
 		<Provider store={store}>
 			<MuiThemeProvider theme={theme}>

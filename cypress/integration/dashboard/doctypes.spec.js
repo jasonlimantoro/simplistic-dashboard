@@ -3,7 +3,16 @@ describe('Doctypes Panel', () => {
 		cy.visit('/dashboard/doctypes');
 		cy.get('[data-testid="doctypes-table"]');
 		
+		const search = 'excel';
 		cy.get('[name="search"]')
-			.type('asdf');
+			.type(search);
+		
+		cy.get('[data-testid="data-row"]').each($e => {
+			cy.wrap($e)
+				.find('td')
+				.eq(0)
+				.invoke('text')
+				.should('match', new RegExp(search, 'i'));
+		});
 	});
 });

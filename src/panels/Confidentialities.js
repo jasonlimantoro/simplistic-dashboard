@@ -58,7 +58,7 @@ const Confidentialities = ({
 					</TableHead>
 					<TableBody>
 						{data.map(c => (
-							<TableRow key={c.id}>
+							<TableRow data-testid='data-row' key={c.id}>
 								<TableCell>{c.id}</TableCell>
 								<TableCell>{c.name}</TableCell>
 								<TableCell>{c.total_docs}</TableCell>

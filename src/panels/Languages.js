@@ -56,7 +56,7 @@ const Languages = ({
 					</TableHead>
 					<TableBody>
 						{data.map(d => (
-							<TableRow key={d.name}>
+							<TableRow key={d.name} data-testid='data-row'>
 								<TableCell>{d.name}</TableCell>
 								<TableCell>{d.total_docs}</TableCell>
 							</TableRow>

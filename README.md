@@ -32,3 +32,6 @@ yarn run cypress:open
 > This will launch the cypress app
 
 2. Click the `Run all specs` button to run all tests or specific files to run only individual tests
+
+## Component Diagram
+<img width="1127" alt="App" src="https://user-images.githubusercontent.com/31163334/57458029-3a9b4200-72a3-11e9-92dc-d7c70c11ebf5.png">
